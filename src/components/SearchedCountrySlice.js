@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 export const SearchedCountrySlice = createSlice({
-    name: 'searchedCountry',
-    initialState : "",
-    reducers:{
-        setSearchTerm : (state, action) =>(state = action.payload)
-}})
+  name: "searchedCountry",
+  initialState: "",
+  reducers: {
+    setSearchTerm: (state, action) => (state = action.payload),
+  },
+});
 
 export const { setSearchTerm } = SearchedCountrySlice.actions;
 

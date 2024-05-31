@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { selectSearchTerm } from "./SearchedCountrySlice";
 import { selectFilteredRegion } from "./regionFilterSlice";
+import Countries from "./Countries";
 
 // Async thunk to fetch countries
 export const loadCountries = createAsyncThunk(
@@ -23,9 +24,14 @@ const sliceOptions = {
   initialState: {
     countries: [],
     isLoading: false,
-    hasError: false
+    hasError: false,
+    loadingTimer: false,
   },
-  reducers: {},
+  reducers: {
+    setLoadingTime: (state, action) => {
+      state.loadingTimer = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadCountries.pending, (state) => {
@@ -41,12 +47,15 @@ const sliceOptions = {
         state.isLoading = false;
         state.hasError = true;
       });
-  }
+  },
 };
 
 export const allCountriesSlice = createSlice(sliceOptions);
 
+export const { setLoadingTime } = allCountriesSlice.actions;
 export const selectAllCountries = (state) => state.allCountries.countries;
+
+export const LoadingTimeBoolean = (state) => state.allCountries.loadingTimer;
 
 export const selectFilteredAllCountries = (state) => {
   const allCountries = selectAllCountries(state);

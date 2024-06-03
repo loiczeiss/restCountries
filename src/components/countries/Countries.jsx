@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCountry } from "./SelectedCountrySlice";
+import { selectCountry } from "../selectedCountry/SelectedCountrySlice";
 import {
   LoadingTimeBoolean,
   loadCountries,
   selectFilteredAllCountries,
   setLoadingTime,
 } from "./CountriesSlice";
-import "../App.css";
-import { setComponent } from "../AppSlice";
-import { isLight as lightBoolean } from "./lightModeSlice";
+import "../../App.css";
+import { setComponent } from "../../AppSlice";
+import { isLight as lightBoolean } from "../lightMode/lightModeSlice";
 
 function Countries() {
   const dispatch = useDispatch();

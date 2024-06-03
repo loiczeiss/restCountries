@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import "./App.css";
-import Countries from "./components/Countries";
+import Countries from "./components/countries/Countries";
 import Header from "./components/Header";
-import SearchAndFilter from "./components/SearchAndFilter";
-import SelectedCountry from "./components/SelectedCountry";
+import SearchAndFilter from "./components/search&filter/SearchAndFilter";
+import SelectedCountry from "./components/selectedCountry/SelectedCountry";
 import { componentPicked as selectComponentPicked } from "./AppSlice";
 
 function App() {

@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { selectSearchTerm } from "./SearchedCountrySlice";
-import { selectFilteredRegion } from "./regionFilterSlice";
-import Countries from "./Countries";
+import { selectSearchTerm } from "../search&filter/SearchedCountrySlice";
+import { selectFilteredRegion } from "../search&filter/regionFilterSlice";
 
 // Async thunk to fetch countries
 export const loadCountries = createAsyncThunk(
@@ -57,13 +56,30 @@ export const selectAllCountries = (state) => state.allCountries.countries;
 
 export const LoadingTimeBoolean = (state) => state.allCountries.loadingTimer;
 
-export const selectFilteredAllCountries = (state) => {
-  const allCountries = selectAllCountries(state);
-  const searchTerm = selectSearchTerm(state);
+// Memoization function
+const memoize = (fn) => {
+  let lastArgs = null;
+  let lastResult = null;
+  return (...args) => {
+    if (lastArgs && lastArgs.length === args.length && args.every((arg, index) => arg === lastArgs[index])) {
+      return lastResult;
+    }
+    lastArgs = args;
+    lastResult = fn(...args);
+    return lastResult;
+  };
+};
 
+const filterCountries = (allCountries, searchTerm) => {
   return allCountries.filter((country) =>
     country.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 };
+
+export const selectFilteredAllCountries = memoize((state) => {
+  const allCountries = selectAllCountries(state);
+  const searchTerm = selectSearchTerm(state);
+  return filterCountries(allCountries, searchTerm);
+});
 
 export default allCountriesSlice.reducer;

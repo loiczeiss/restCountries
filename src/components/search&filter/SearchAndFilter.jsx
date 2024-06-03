@@ -6,8 +6,8 @@ import {
   removeFilter,
   selectFilteredRegion,
 } from "./regionFilterSlice";
-import { loadCountries } from "./CountriesSlice";
-import { isLight as lightCheck } from "./lightModeSlice";
+import { loadCountries } from "../countries/CountriesSlice";
+import { isLight as lightCheck } from "../lightMode/lightModeSlice";
 
 function SearchAndFilter() {
   const [liAppearance, setLiAppearance] = useState({ display: "none" });

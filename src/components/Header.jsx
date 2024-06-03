@@ -5,8 +5,8 @@ import {
   isLight,
   setLightText,
   lightText as textLightMode,
-} from "./lightModeSlice";
-import { LoadingTimeBoolean } from "./CountriesSlice";
+} from "./lightMode/lightModeSlice";
+import { LoadingTimeBoolean } from "./countries/CountriesSlice";
 
 function Header() {
   const dispatch = useDispatch();

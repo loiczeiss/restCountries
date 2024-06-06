@@ -61,25 +61,6 @@ function Countries() {
     }
   }, [isLoading]);
 
-  if (loadingTimerBool) {
-    return (
-      <article
-        style={{
-          background: isLight ? "hsl(0, 0%, 98%)" : "hsl(207, 26%, 17%)",
-        }}
-        className="bg-veryDarkBlue w-full min-h-full xl:px-12 pt-14 flex flex-col xl:flex-row flex-wrap content-center justify-center"
-      >
-        <div
-          style={{
-            boxShadow: isLight
-              ? "0 0 0 3px hsl(207, 26%, 17%) inset"
-              : "0 0 0 3px hsl(0, 0%, 98%) inset",
-          }}
-          className="loader -top-28"
-        ></div>
-      </article>
-    );
-  }
 
   if (hasError) {
     return <div>Error loading countries.</div>;
@@ -107,14 +88,14 @@ function Countries() {
         >
           <div className="h-48 w-full flex items-center justify-center overflow-hidden">
             <img
-              className="h-full w-auto"
+              className="h-full w-full"
               src={country.flags.png}
               alt={`${country.name} flag`}
             />
           </div>
           <div className="p-4">
             <h2
-              className="text-lg font-bold mb-2"
+              className="text-lg font-bold mb-2 font-nunito"
               style={{
                 color: isLight ? "hsl(200, 15%, 8%)" : "hsl(0, 0%, 100%)",
               }}
@@ -122,7 +103,7 @@ function Countries() {
               {country.name}
             </h2>
             <p
-              className="text-sm"
+              className="text-sm font-nunito"
               style={{
                 color: isLight ? "hsl(200, 15%, 8%)" : "hsl(0, 0%, 100%)",
               }}
@@ -130,20 +111,20 @@ function Countries() {
               Population: <span className="font-light">{country.population}</span>
             </p>
             <p
-              className="text-sm"
+              className="text-sm font-nunito"
               style={{
                 color: isLight ? "hsl(200, 15%, 8%)" : "hsl(0, 0%, 100%)",
               }}
             >
-              Region: <span className="font-light">{country.region}</span>
+              Region: <span className="font-light font-nunito">{country.region}</span>
             </p>
             <p
-              className="text-sm"
+              className="text-sm font-nunito"
               style={{
                 color: isLight ? "hsl(200, 15%, 8%)" : "hsl(0, 0%, 100%)",
               }}
             >
-              Capital: <span className="font-light">{country.capital}</span>
+              Capital: <span className="font-light font-nunito">{country.capital}</span>
             </p>
           </div>
         </section>
@@ -159,7 +140,7 @@ function Countries() {
       className="bg-veryDarkBlue w-full min-h-screen xl:px-12 pt-14 flex flex-col xl:flex-row flex-wrap"
     >
       <div className="w-full h-[80vh] flex flex-col items-center justify-center">
-        <Grid
+      {!loadingTimerBool &&   <Grid
           columnCount={numCols}
           columnWidth={itemWidth}
           height={800} // Set height explicitly or use CSS to manage it
@@ -168,7 +149,17 @@ function Countries() {
           width={numCols * itemWidth} // Use full width of columns
         >
           {CountryCard}
-        </Grid>
+        </Grid>}
+   {loadingTimerBool &&      <div
+  style={{
+    width: "50px", // Fixed width
+    height: "50px", // Fixed height
+    boxShadow: isLight
+      ? "0 0 0 3px hsl(207, 26%, 17%) inset"
+      : "0 0 0 3px hsl(0, 0%, 98%) inset",
+  }}
+  className="loader -top-28"
+></div>}
       </div>
     </article>
   );

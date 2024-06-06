@@ -50,3 +50,14 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* Hide the scrollbar for the grid */
+div {
+  overflow: hidden; /* Prevent showing the scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+div::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
